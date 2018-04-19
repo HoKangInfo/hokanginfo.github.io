@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+    <head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+        <title>install disperse forward proxy &middot; The Issue of the Day Before</title>
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600' type='text/css'>
+        <link rel="stylesheet" href="/libraries/normalize.3.0.1.css" />
+        <link rel="stylesheet" href="/css/asciidoctor-default.css" />
+        <link rel="stylesheet" href="/css/themes.css" />
+        <link rel="stylesheet" href="/css/liquorice.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-icon-144x144.png" sizes="144x144" />
+        <link rel="alternate" href="/" type="application/rss+xml" title="The Issue of the Day Before" />
+    </head>
+    <body class="li-body">
+
+<header class="li-page-header">
+    <div class="container">
+        <div class="row">
+            <div class="sixteen columns">
+                <div class="li-brand li-left">
+                <a href="/">The Issue of the Day Before</a></div>
+                <div class="li-menu li-right">
+                    <span class="li-menu-icon" onclick="javascript:toggle('menu');">&#9776;</span>
+                    <ul id="menu2" class="li-menu-items">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen columns">
+                <ul id="menu" class="li-menu-items li-menu-mobile">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+    <div class="container">
+        <div class="row gridpaper">
+            <div class="sixteen columns">
+                <article class="li-article">
+                    <header class="li-article-header">
+                        <h1 class="li-article-title">架設分散式的正向代理</h1>
+                        <span class="li-article-taxonomies">
+                            
+
+                            
+                                with tags
+                                
+                                    <a href="/tags/install">install</a>
+                                
+                                    <a href="/tags/disperse">disperse</a>
+                                
+                                    <a href="/tags/caddy">caddy</a>
+                                
+                                    <a href="/tags/haproxy">haproxy</a>
+                                
+                                    <a href="/tags/forward">forward</a>
+                                
+                                    <a href="/tags/proxy">proxy</a>
+                                
+                            
+                        </span>
+                         - 
+                        <time class="li-article-date">2018-03-03</time>
+                    </header>
+                    <section>
+                        <div class="paragraph">
+<p>下載 Caddy Server 和 HAProxy &#8594;
+設定 Caddy Server 為 Forward Proxy Server &#8594;
+設定 HAProxy 為 Reverse Proxy Server 並指向 Caddy Server
+</p>
+</div>
+<div class="sect1">
+<h2 id="_why">Why</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>想要透過與本機不同的 IP 來存取網站，除了換一個 IP 外，簡單的設定透過一個非通透的 Proxy Server 來存取也是個方法。
+但要找的一個安全又穩定的 Proxy Server 有一定的難度，所以就自己架一個吧。</p>
+</div>
+<div class="paragraph">
+<p>但想每次存取網站都換一個 IP，而不用每次查詢都換一個 Proxy Server，就得在前面架一個反向代理來指向後面多台的正向代理。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="diag 307c5ae88757a99a677139f5642f8355" width="690" height="266">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what">What</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Caddy Server</dt>
+<dd>
+<p><a href="https://caddyserver.com">Caddy</a> 是使用 <a href="https://golang.org">GoLang</a> 編寫的 Web 伺服器，
+一般常用來建立反向代理(Reverse proxy)或靜態網頁伺服器。
+以設定簡單和自動簽發 HTTPS 證書為賣點。
+<a href="https://letsencrypt.org">Let&#8217;s Encrypt</a> 是默認的證書頒發機構。</p>
+</dd>
+<dt class="hdlist1">HAProxy</dt>
+<dd>
+<p><a href="http://www.haproxy.org">HAProxy</a> 高效的負載平衡或代理伺服器。通常用來做為網站的分流或平衡負載。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how">How</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_下載_安裝_caddy">下載 &amp;&amp; 安裝 caddy</h3>
+<div class="paragraph">
+<p>參見 <a href="/post/install-caddy-as-forward-proxy-server/">將 Caddy 安裝成正向代理伺服器</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_下載_安裝_haproxy">下載 &amp;&amp; 安裝 HAProxy</h3>
+<div class="paragraph">
+<p>如果熟悉編譯可以直接 <a href="http://www.haproxy.org/download/">下載</a> 原始檔後以 <code>make</code> 編譯安裝；
+或直接套件安裝 <code>sudo apt-get install haproxy</code>。然後編輯設定檔，如下</p>
+</div>
+<div class="listingblock">
+<div class="title">haproxy.cfg</div>
+<div class="content">
+<pre>global
+defaults
+        mode    http
+        timeout client          30s
+        timeout server          30s
+        timeout connect         30s
+
+frontend proxy
+        bind *:&lt;port&gt;                   <b class="conum">(1)</b>
+        default_backend forward
+
+backend forward
+        server FP1 &lt;host&gt;:&lt;port&gt;  check <b class="conum">(2)</b>
+        server FP2 &lt;host&gt;:&lt;port&gt;  check
+        server FP3 &lt;host&gt;:&lt;port&gt;  check</pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>&lt;port&gt; 替換為 HAProxy 伺服器傾聽的埠</p>
+</li>
+<li>
+<p>&lt;host&gt;:&lt;port&gt; 替換為 Caddy 伺服器傾聽的 IP 和 Port</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>執行 <code>sudo haproxy -f &lt;path&gt;/haproxy.cfg</code>，即可。</p>
+</div>
+</div>
+</div>
+</div>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+        <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2finstall-disperse-forward-proxy%2f"/>
+    </div>
+</div>
+
+
+        <div class="row li-pagination">
+            <div class="eight columns">
+                <div class="li-pagination-previous">
+                    
+                        <a href="/post/install-hugo/"> 安裝支援 asciidoc 語法的 hugo</a>
+                        &lt;&lt; 
+                    
+                </div>
+            </div>
+            <div class="eight columns">
+                <div class="li-pagination-next">
+                    
+                        &gt;&gt;
+                        <a href="/post/install-caddy-as-forward-proxy-server/"> 將 Caddy 安裝成正向代理伺服器</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="li-page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="sixteen columns">
+                <div class="li-page-footer-legal">
+                    &copy; 2018. All rights reserved. 
+                </div>
+                <div class="li-page-footer-theme">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript">
+    <!--
+    function toggle(id) {
+        var e = document.getElementById(id);
+        e.style.display == 'block' ? e.style.display = 'none' : e.style.display = 'block';
+    }
+    
+    </script>
+    
+    </body>
+</html>
+

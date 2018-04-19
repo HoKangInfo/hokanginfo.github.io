@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Issue of the Day Before</title>
+    <link>/</link>
+    <description>Recent content on The Issue of the Day Before</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 12 Mar 2018 02:33:47 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>install hugo</title>
+      <link>/post/install-hugo/</link>
+      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
+      
+      <guid>/post/install-hugo/</guid>
+      <description>&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安裝 asciidoctor 前要先要有 ruby 環境，ruby 可藉由 rbenv 或 RVM 安裝&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安裝 hugo</description>
+    </item>
+    
+    <item>
+      <title>install disperse forward proxy</title>
+      <link>/post/install-disperse-forward-proxy/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/post/install-disperse-forward-proxy/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;下載 Caddy Server 和 HAProxy &amp;#8594;
+設定 Caddy Server 為 Forward Proxy Server &amp;#8594;
+設定 HAProxy 為 Reverse Proxy Server 並指向 Caddy Server
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>install caddy as forward proxy server</title>
+      <link>/post/install-caddy-as-forward-proxy-server/</link>
+      <pubDate>Tue, 06 Mar 2018 06:50:38 +0000</pubDate>
+      
+      <guid>/post/install-caddy-as-forward-proxy-server/</guid>
+      <description>Sumary 到 Caddy Server 下載頁，選擇需要的 PLATFORM， PLUGINS 和適當的 LICENSE &amp;#8594; 複製 One-step installer script (bash) 內的指令到要安裝的主機上執行該指令 &amp;#8594; 設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server Why 除非 ISP 有</description>
+    </item>
+    
+    <item>
+      <title>clean git repo</title>
+      <link>/post/clean-git-repo/</link>
+      <pubDate>Mon, 29 Jan 2018 02:24:16 +0000</pubDate>
+      
+      <guid>/post/clean-git-repo/</guid>
+      <description>Sumary 紀錄目前的 git 設定 &amp;#8594; 刪除 .git &amp;#8594; 重新初始化 git 倉儲 &amp;#8594; 設定遠端 git 倉儲 &amp;#8594; 將檔案加入本地倉儲 &amp;#8594; 強迫推送到遠端倉儲 紀錄目前的設定 .git/config &amp;gt; cd &amp;lt;workfolder&amp;gt; &amp;gt; cat .git/config [core] repositoryformatversion = 0 filemode =</description>
+    </item>
+    
+  </channel>
+</rss>

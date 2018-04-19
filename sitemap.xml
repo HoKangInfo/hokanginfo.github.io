@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/post/install-hugo/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/install-disperse-forward-proxy/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/install-caddy-as-forward-proxy-server/</loc>
+    <lastmod>2018-03-06T06:50:38+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/clean-git-repo/</loc>
+    <lastmod>2018-01-29T02:24:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/asciidoctor/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/caddy/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/disperse/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/forward/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/git/</loc>
+    <lastmod>2018-01-29T02:24:16+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/haproxy/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/hugo/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/install/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/proxy/</loc>
+    <lastmod>2018-03-09T06:01:24+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

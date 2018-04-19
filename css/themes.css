@@ -1,0 +1,19 @@
+/**
+ * grid paper background
+ */
+.gridpaper {
+    background: white;
+    width: 100%;
+
+    background-image:
+    linear-gradient(rgba(228, 231, 227, .3) 1px, transparent 0),
+    linear-gradient(90deg, rgba(228, 231, 227, .3) 1px, transparent 0),
+    linear-gradient(#e4e7e3 1px, transparent 0),
+    linear-gradient(90deg, #e4e7e3 1px, transparent 0);
+    background-size:
+            15px 15px,
+            15px 15px,
+            75px 75px,
+            75px 75px;
+}
+

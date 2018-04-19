@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on The Issue of the Day Before</title>
+    <link>/tags/hugo/</link>
+    <description>Recent content in Hugo on The Issue of the Day Before</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 12 Mar 2018 02:33:47 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>install hugo</title>
+      <link>/post/install-hugo/</link>
+      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
+      
+      <guid>/post/install-hugo/</guid>
+      <description>&lt;div class=&#34;ulist&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安裝 asciidoctor 前要先要有 ruby 環境，ruby 可藉由 rbenv 或 RVM 安裝&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安裝 hugo</description>
+    </item>
+    
+  </channel>
+</rss>

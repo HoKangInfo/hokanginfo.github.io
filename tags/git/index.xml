@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on The Issue of the Day Before</title>
+    <link>/tags/git/</link>
+    <description>Recent content in Git on The Issue of the Day Before</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Mon, 29 Jan 2018 02:24:16 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>clean git repo</title>
+      <link>/post/clean-git-repo/</link>
+      <pubDate>Mon, 29 Jan 2018 02:24:16 +0000</pubDate>
+      
+      <guid>/post/clean-git-repo/</guid>
+      <description>Sumary 紀錄目前的 git 設定 &amp;#8594; 刪除 .git &amp;#8594; 重新初始化 git 倉儲 &amp;#8594; 設定遠端 git 倉儲 &amp;#8594; 將檔案加入本地倉儲 &amp;#8594; 強迫推送到遠端倉儲 紀錄目前的設定 .git/config &amp;gt; cd &amp;lt;workfolder&amp;gt; &amp;gt; cat .git/config [core] repositoryformatversion = 0 filemode =</description>
+    </item>
+    
+  </channel>
+</rss>
