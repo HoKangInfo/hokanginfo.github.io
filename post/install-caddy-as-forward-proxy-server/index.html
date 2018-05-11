@@ -6,7 +6,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
         <title>install caddy as forward proxy server &middot; The Issue of the Day Before</title>
-        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600' type='text/css'>
+        
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-6102554-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-6102554-1');
+</script>
+
+
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600'>
+        <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css"/>
+        <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/tomorrow.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <link rel="stylesheet" href="/libraries/normalize.3.0.1.css" />
         <link rel="stylesheet" href="/css/asciidoctor-default.css" />
         <link rel="stylesheet" href="/css/themes.css" />
@@ -56,7 +73,7 @@
                             
 
                             
-                                with tags
+                                <i class="post-tags" alt="tags">
                                 
                                     <a href="/tags/install">install</a>
                                 
@@ -66,21 +83,20 @@
                                 
                                     <a href="/tags/proxy">proxy</a>
                                 
+                                </i>
                             
                         </span>
                          - 
-                        <time class="li-article-date">2018-03-03</time>
+                        <time class="li-article-date">2018-03-06</time>
                     </header>
                     <section>
-                        <div class="sect1">
-<h2 id="_sumary">Sumary</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>到 Caddy Server 下載頁，選擇需要的 PLATFORM， PLUGINS 和適當的 LICENSE &#8594;
+                        <div class="paragraph">
+<p>到 <a href="https://caddyserver.com/download">Caddy Server 下載頁</a>，選擇主機的 PLATFORM(e.q. Linux 64-bit)，
+需要的 PLUGINS(e.q. hook.service, http.forwardproxy, http.ipfilter)
+和適當的 LICENSE(e.q. Personal) &#8594;
 複製 <code>One-step installer script (bash)</code> 內的指令到要安裝的主機上執行該指令 &#8594;
-設定 Caddy Server 設定檔 &#8594; 執行 Caddy Server</p>
-</div>
-</div>
+設定 Caddy Server 設定檔 &#8594; 執行 Caddy Server
+</p>
 </div>
 <div class="sect1">
 <h2 id="_why">Why</h2>
@@ -192,7 +208,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>&gt; curl https://getcaddy.com | bash -s personal hook.service,http.forwardproxy,http.ipfilter</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; curl https://getcaddy.com | bash -s personal hook.service,http.forwardproxy,http.ipfilter</code></pre>
 </div>
 </div>
 </div>
@@ -309,11 +325,10 @@
 所以，你得找一個沒這問題的反向代理伺服器來工作。</p>
 </div>
 <div class="paragraph">
-<p>當然，首選 <a href="http://www.haproxy.org">HAProxy</a>。 怎麼架，就請參考 <a href="install_disperse_forward_proxy.html">架設分散式的正向代理</a>。</p>
+<p>當然，首選 <a href="http://www.haproxy.org">HAProxy</a>。 怎麼架，就請參考 <a href="/post/install-disperse-forward-proxy/">架設分散式的正向代理</a>。</p>
 </div>
 </div>
 </div>
-
                     </section>
                 </article>
             </div>
@@ -369,7 +384,6 @@
     }
     
     </script>
-    
     </body>
 </html>
 

@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-        <title>clean git repo &middot; The Issue of the Day Before</title>
+        <title>Shell Filter Empty Line &middot; The Issue of the Day Before</title>
         
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6102554-1"></script>
 <script>
@@ -68,142 +68,96 @@
             <div class="sixteen columns">
                 <article class="li-article">
                     <header class="li-article-header">
-                        <h1 class="li-article-title">清除 git 所有遠端舊的紀錄 重新來過</h1>
+                        <h1 class="li-article-title">使用 awk 命令去掉文字檔中的空行</h1>
                         <span class="li-article-taxonomies">
                             
 
                             
                                 <i class="post-tags" alt="tags">
                                 
-                                    <a href="/tags/git">git</a>
+                                    <a href="/tags/shell">shell</a>
+                                
+                                    <a href="/tags/awk">awk</a>
                                 
                                 </i>
                             
                         </span>
                          - 
-                        <time class="li-article-date">2018-01-29</time>
+                        <time class="li-article-date">2018-04-24</time>
                     </header>
                     <section>
                         <div class="paragraph">
-<p>記錄目前 git 遠端倉儲的路徑 &#8594;
-刪除工作目錄中的 <code>.git</code> 目錄 &#8594;
-重新初始化本地的 git 倉儲 &#8594;
-設定遠端 git 倉儲路徑 &#8594;
-將檔案加入本地倉儲 &#8594;
-強迫推送到遠端倉儲
+<p>在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 <code>awk</code> 來處理。
 </p>
 </div>
 <div class="sect1">
-<h2 id="_記錄設定">記錄設定</h2>
+<h2 id="_what">What</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>切換到工作目錄，並記錄下遠端倉儲的路徑。 遠端倉儲的路徑可以看目錄下的 <code>.git/config</code>
-檔案內容或使用 <code>git config --get remote.origin.url</code> 命令查閱。</p>
-</div>
-<div class="listingblock">
-<div class="title">.git/config</div>
-<div class="content">
-<pre class="highlight"><code class="language-ini" data-lang="ini">[core]
-        repositoryformatversion = 0
-        filemode = true
-        bare = false
-        logallrefupdates = true
-[remote "origin"]
-        url = git@domain:user/repo.git   <b class="conum">(1)</b>
-        fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
-        remote = origin
-        merge = refs/heads/master</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>記錄下遠端倉儲的路徑，後面重設時需要用到</p>
-</li>
-</ol>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">awk</dt>
+<dd>
+<p>Linux 及 Unix 環境中的一種的純文本處理工具。概念是把文字檔當作表格來處理。</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_刪除_code_git_code_並重新推送">刪除 <code>.git</code> 並重新推送</h2>
+<h2 id="_how">How</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_有非空白以外的字元才處理">有非空白以外的字元才處理</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk NF &lt;file&gt;</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>切換到工作目錄，且以下命令都必須在工作目錄下執行。</p>
+<p><code>awk</code> 的簡單的語法結構為 <code>awk [Pattern] '[{Actions}]' [Files]</code>，
+<code>awk</code> 會依據 <code>Pattern</code> 傳回值來決定要不要處理，如果省略就表示每一行都會處理。
+而如果 <code>'{Actions}'</code> 省略內定為 <code>'{print $0}'</code>，就是印出整行文字。
+沒有以 <code>-F fs</code> 指定欄位分隔符號時，內定是一個以上的空白(<code>/[\s\t]+/</code>)來分隔欄位，<code>NF</code> 表示為目前該行的欄位數。
+且 <code>awk</code> 會省略頭尾空白。</p>
+</div>
+<div class="paragraph">
+<p>所以，上述的 <code>awk NF</code> 指令的意思為如果有欄位就把該行印出來。</p>
+</div>
+<div class="paragraph">
+<p>用 <code>javascript</code> 來寫就約等於</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; rm -rf .git      <b class="conum">(1)</b>
-&gt; git init         <b class="conum">(2)</b>
-&gt; git remote add origin git@domain:user/repo.git <b class="conum">(3)</b>
-&gt; git add --all    <b class="conum">(4)</b>
-&gt; git commit -a -m "clean"          <b class="conum">(5)</b>
-&gt; git push -u origin master --force <b class="conum">(6)</b></code></pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var line = '';
+(line.trim().split(/[\s\t]+/).filter(x=&gt;x.length).length) &amp;&amp; console.log(line)</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>清除本地端所有紀錄</p>
-</li>
-<li>
-<p>重新初始化本地 git</p>
-</li>
-<li>
-<p>重新加入遠端</p>
-</li>
-<li>
-<p>重新加入本地檔案</p>
-</li>
-<li>
-<p>並交付所有本地檔案</p>
-</li>
-<li>
-<p>強迫更新所有本地檔案到遠端</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>當然，上述程式碼還要加上讀檔的部分才能達到跟 <code>awk NF</code> 差不多的功能。</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_簡易_script">簡易 script</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_有空白字元也算">有空白字元也算</h3>
 <div class="listingblock">
-<div class="title">cleanGit.sh</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">#!/bin/bash
-if test -z "$1" ; then
-  echo "error: must has path param"
-  exit 1
-fi
-
-cd $1 || (echo "Cannot change directory!" 1&gt;&amp;2 &amp;&amp; exit 1)
-
-URL=$(git config remote.origin.url)
-if test -z "$URL" ; then
-    echo "Not found git!" 1&gt;&amp;2
-    exit 1
-fi
-
-echo "remote.origin.url: $URL"
-
-echo "clean git"
-rm -rf .git
-
-echo "reset git"
-git init
-git remote add origin "$URL"
-git add --all
-git commit -a -m "new"              <b class="conum">(1)</b>
-git push -u origin master --force</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk /./ &lt;file&gt;</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>"new" 可以換成其他合適的說明</p>
-</li>
-</ol>
+<div class="paragraph">
+<p><code>Pattern</code> 可以為正規表示式，所以 <code>awk /./</code> 的意思為如果有任何換行符號之外的字元就把該行印出來。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_去除註解">去除註解</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk '!/^\s*#/' &lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同理，可以利用來去掉程式碼中的註解。
+<code>Pattern</code> 最好用單引號 <code>'</code> 括起來，以避免 <code>awk</code> 無法辨識。語法結構表示為`awk 'Pattern {Actions}'`。</p>
+</div>
 </div>
 </div>
 </div>
@@ -215,7 +169,7 @@ git push -u origin master --force</code></pre>
         <div class="row li-author">
     <div class="sixteen columns">
         閱讀在雲端 <img id="qrcode"
-        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2fclean-git-repo%2f"/>
+        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2fshell-filter-empty-line%2f"/>
     </div>
 </div>
 
@@ -224,7 +178,7 @@ git push -u origin master --force</code></pre>
             <div class="eight columns">
                 <div class="li-pagination-previous">
                     
-                        <a href="/post/install-caddy-as-forward-proxy-server/"> 將 Caddy 安裝成正向代理伺服器</a>
+                        <a href="/post/shell-grep-ps-out-of-self/"> 使用 grep 過濾 ps 輸出 得到不包含自己的結果</a>
                         &lt;&lt; 
                     
                 </div>
@@ -232,7 +186,8 @@ git push -u origin master --force</code></pre>
             <div class="eight columns">
                 <div class="li-pagination-next">
                     
-                        &nbsp;
+                        &gt;&gt;
+                        <a href="/post/install-hugo/"> 安裝支援 asciidoc 語法的 hugo</a>
                     
                 </div>
             </div>

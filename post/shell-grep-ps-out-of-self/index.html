@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-        <title>clean git repo &middot; The Issue of the Day Before</title>
+        <title>Shell Grep Ps Out of Self &middot; The Issue of the Day Before</title>
         
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6102554-1"></script>
 <script>
@@ -68,142 +68,124 @@
             <div class="sixteen columns">
                 <article class="li-article">
                     <header class="li-article-header">
-                        <h1 class="li-article-title">清除 git 所有遠端舊的紀錄 重新來過</h1>
+                        <h1 class="li-article-title">使用 grep 過濾 ps 輸出 得到不包含自己的結果</h1>
                         <span class="li-article-taxonomies">
                             
 
                             
                                 <i class="post-tags" alt="tags">
                                 
-                                    <a href="/tags/git">git</a>
+                                    <a href="/tags/shell">shell</a>
+                                
+                                    <a href="/tags/grep">grep</a>
                                 
                                 </i>
                             
                         </span>
                          - 
-                        <time class="li-article-date">2018-01-29</time>
+                        <time class="li-article-date">2018-04-25</time>
                     </header>
                     <section>
                         <div class="paragraph">
-<p>記錄目前 git 遠端倉儲的路徑 &#8594;
-刪除工作目錄中的 <code>.git</code> 目錄 &#8594;
-重新初始化本地的 git 倉儲 &#8594;
-設定遠端 git 倉儲路徑 &#8594;
-將檔案加入本地倉儲 &#8594;
-強迫推送到遠端倉儲
+<p>在使用 <code>ps</code> 指令查詢目前執行的 process 時，為方便通常會搭配 <code>grep</code> 指令來過濾結果。
+但因為 <code>grep</code> 本身也是一個 process ，所以常常過濾的結果還會包含 <code>grep</code> 指令本身。
+這可能不是我們想要的。那應該如何下指令?
 </p>
 </div>
+<div class="paragraph">
+<p>例如：</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ps -ef | grep init
+
+root         1     0  0  2016 ?        00:00:11 /sbin/init              <b class="conum">(1)</b>
+root     17064 24257  0 15:51 pts/2    00:00:00 grep --color=auto init  <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>真正要查的結果</p>
+</li>
+<li>
+<p><code>grep</code> 指令多出來的結果</p>
+</li>
+</ol>
+</div>
 <div class="sect1">
-<h2 id="_記錄設定">記錄設定</h2>
+<h2 id="_一般方法">一般方法</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>切換到工作目錄，並記錄下遠端倉儲的路徑。 遠端倉儲的路徑可以看目錄下的 <code>.git/config</code>
-檔案內容或使用 <code>git config --get remote.origin.url</code> 命令查閱。</p>
+<p>直覺上，既然多出來就在過濾掉就好。 <code>grep</code> 指令的在 PATTERN 上是沒有否定算子的，但有一個反向參數。
+你可以使用 <code>grep -v PATTERN</code> 來去掉吻合的結果。</p>
 </div>
 <div class="listingblock">
-<div class="title">.git/config</div>
 <div class="content">
-<pre class="highlight"><code class="language-ini" data-lang="ini">[core]
-        repositoryformatversion = 0
-        filemode = true
-        bare = false
-        logallrefupdates = true
-[remote "origin"]
-        url = git@domain:user/repo.git   <b class="conum">(1)</b>
-        fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
-        remote = origin
-        merge = refs/heads/master</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ps -ef | grep &lt;string&gt; | grep -v grep</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>記錄下遠端倉儲的路徑，後面重設時需要用到</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>套用上述的例子，可以得到下列結果</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ps -ef | grep init | grep -v grep
+
+root         1     0  0  2016 ?        00:00:11 /sbin/init</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_刪除_code_git_code_並重新推送">刪除 <code>.git</code> 並重新推送</h2>
+<h2 id="_更簡單的方法">更簡單的方法</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>切換到工作目錄，且以下命令都必須在工作目錄下執行。</p>
+<p>透過一個正規表示式的小技巧，我們可以這樣下指令。</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; rm -rf .git      <b class="conum">(1)</b>
-&gt; git init         <b class="conum">(2)</b>
-&gt; git remote add origin git@domain:user/repo.git <b class="conum">(3)</b>
-&gt; git add --all    <b class="conum">(4)</b>
-&gt; git commit -a -m "clean"          <b class="conum">(5)</b>
-&gt; git push -u origin master --force <b class="conum">(6)</b></code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ps -ef | grep [s]tring  <b class="conum">(1)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <ol>
 <li>
-<p>清除本地端所有紀錄</p>
-</li>
-<li>
-<p>重新初始化本地 git</p>
-</li>
-<li>
-<p>重新加入遠端</p>
-</li>
-<li>
-<p>重新加入本地檔案</p>
-</li>
-<li>
-<p>並交付所有本地檔案</p>
-</li>
-<li>
-<p>強迫更新所有本地檔案到遠端</p>
+<p>將要過濾字串的第一個字以 <code>[]</code> 包裹起來，</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>同上述的例子，可以得到下列結果</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_簡易_script">簡易 script</h2>
-<div class="sectionbody">
 <div class="listingblock">
-<div class="title">cleanGit.sh</div>
+<div class="title">e.q.</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">#!/bin/bash
-if test -z "$1" ; then
-  echo "error: must has path param"
-  exit 1
-fi
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ps -ef | grep [i]nit
 
-cd $1 || (echo "Cannot change directory!" 1&gt;&amp;2 &amp;&amp; exit 1)
-
-URL=$(git config remote.origin.url)
-if test -z "$URL" ; then
-    echo "Not found git!" 1&gt;&amp;2
-    exit 1
-fi
-
-echo "remote.origin.url: $URL"
-
-echo "clean git"
-rm -rf .git
-
-echo "reset git"
-git init
-git remote add origin "$URL"
-git add --all
-git commit -a -m "new"              <b class="conum">(1)</b>
-git push -u origin master --force</code></pre>
+root         1     0  0  2016 ?        00:00:11 /sbin/init</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<ol>
-<li>
-<p>"new" 可以換成其他合適的說明</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>這是因為原本下 <code>grep init</code> 時，在 <code>ps</code> 的結果中輸出為</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>root     17064 24257  0 15:51 pts/2    00:00:00 grep --color=auto init</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而下 <code>grep [i]nit</code> 時，在 <code>ps</code> 的結果中輸出為</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>root     17064 24257  0 15:51 pts/2    00:00:00 grep --color=auto [i]nit</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>而 PATTERN <code>[i]nit</code> 吻合 <code>init</code> 卻不吻合 <code>[i]nit</code>，所以就能濾掉 <code>grep</code> 本身的 process。</p>
 </div>
 </div>
 </div>
@@ -215,7 +197,7 @@ git push -u origin master --force</code></pre>
         <div class="row li-author">
     <div class="sixteen columns">
         閱讀在雲端 <img id="qrcode"
-        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2fclean-git-repo%2f"/>
+        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2fshell-grep-ps-out-of-self%2f"/>
     </div>
 </div>
 
@@ -224,7 +206,7 @@ git push -u origin master --force</code></pre>
             <div class="eight columns">
                 <div class="li-pagination-previous">
                     
-                        <a href="/post/install-caddy-as-forward-proxy-server/"> 將 Caddy 安裝成正向代理伺服器</a>
+                        <a href="/post/shell-output-to-screen-and-file/"> 將標準輸出同時輸出到螢幕和檔案</a>
                         &lt;&lt; 
                     
                 </div>
@@ -232,7 +214,8 @@ git push -u origin master --force</code></pre>
             <div class="eight columns">
                 <div class="li-pagination-next">
                     
-                        &nbsp;
+                        &gt;&gt;
+                        <a href="/post/shell-filter-empty-line/"> 使用 awk 命令去掉文字檔中的空行</a>
                     
                 </div>
             </div>

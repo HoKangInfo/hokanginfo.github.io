@@ -6,10 +6,50 @@
     <description>Recent content on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 12 Mar 2018 02:33:47 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Apr 2018 08:37:08 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shell Output to Screen and File</title>
+      <link>/post/shell-output-to-screen-and-file/</link>
+      <pubDate>Wed, 25 Apr 2018 08:37:08 +0000</pubDate>
+      
+      <guid>/post/shell-output-to-screen-and-file/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;有時候我們看到螢幕上的輸出結果，希望能記錄下來。這時候可以使用重導輸出算子 &lt;code&gt;&amp;gt;&lt;/code&gt; 。
+例如使用 &lt;code&gt;ls &amp;gt; out.txt&lt;/code&gt; 將 &lt;code&gt;ls&lt;/code&gt; 的結果寫到檔案 &lt;code&gt;out.txt&lt;/code&gt; 上，但這樣我們在螢幕上便看不到結果。
+要看結果必須再用 &lt;code&gt;cat out.txt&lt;/code&gt; 將檔案內容輸出到螢幕上。 這時候便可使用 &lt;code&gt;tee&lt;/code&gt; 這個指令。
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell Grep Ps Out of Self</title>
+      <link>/post/shell-grep-ps-out-of-self/</link>
+      <pubDate>Wed, 25 Apr 2018 01:42:22 +0000</pubDate>
+      
+      <guid>/post/shell-grep-ps-out-of-self/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;在使用 &lt;code&gt;ps&lt;/code&gt; 指令查詢目前執行的 process 時，為方便通常會搭配 &lt;code&gt;grep&lt;/code&gt; 指令來過濾結果。
+但因為 &lt;code&gt;grep&lt;/code&gt; 本身也是一個 process ，所以常常過濾的結果還會包含 &lt;code&gt;grep&lt;/code&gt; 指令本身。
+這可能不是我們想要的。那應該如何下指令?
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell Filter Empty Line</title>
+      <link>/post/shell-filter-empty-line/</link>
+      <pubDate>Tue, 24 Apr 2018 07:07:20 +0000</pubDate>
+      
+      <guid>/post/shell-filter-empty-line/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 &lt;code&gt;awk&lt;/code&gt; 來處理。
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>install hugo</title>
@@ -17,13 +57,11 @@
       <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
       
       <guid>/post/install-hugo/</guid>
-      <description>&lt;div class=&#34;ulist&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;安裝 asciidoctor 前要先要有 ruby 環境，ruby 可藉由 rbenv 或 RVM 安裝&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;安裝 hugo</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;安裝 asciidoctor &amp;#8594;
+安裝 hugo
+&lt;/p&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -46,7 +84,14 @@
       <pubDate>Tue, 06 Mar 2018 06:50:38 +0000</pubDate>
       
       <guid>/post/install-caddy-as-forward-proxy-server/</guid>
-      <description>Sumary 到 Caddy Server 下載頁，選擇需要的 PLATFORM， PLUGINS 和適當的 LICENSE &amp;#8594; 複製 One-step installer script (bash) 內的指令到要安裝的主機上執行該指令 &amp;#8594; 設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server Why 除非 ISP 有</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;到 &lt;a href=&#34;https://caddyserver.com/download&#34;&gt;Caddy Server 下載頁&lt;/a&gt;，選擇主機的 PLATFORM(e.q. Linux 64-bit)，
+需要的 PLUGINS(e.q. hook.service, http.forwardproxy, http.ipfilter)
+和適當的 LICENSE(e.q. Personal) &amp;#8594;
+複製 &lt;code&gt;One-step installer script (bash)&lt;/code&gt; 內的指令到要安裝的主機上執行該指令 &amp;#8594;
+設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server
+&lt;/p&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -55,7 +100,15 @@
       <pubDate>Mon, 29 Jan 2018 02:24:16 +0000</pubDate>
       
       <guid>/post/clean-git-repo/</guid>
-      <description>Sumary 紀錄目前的 git 設定 &amp;#8594; 刪除 .git &amp;#8594; 重新初始化 git 倉儲 &amp;#8594; 設定遠端 git 倉儲 &amp;#8594; 將檔案加入本地倉儲 &amp;#8594; 強迫推送到遠端倉儲 紀錄目前的設定 .git/config &amp;gt; cd &amp;lt;workfolder&amp;gt; &amp;gt; cat .git/config [core] repositoryformatversion = 0 filemode =</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;記錄目前 git 遠端倉儲的路徑 &amp;#8594;
+刪除工作目錄中的 &lt;code&gt;.git&lt;/code&gt; 目錄 &amp;#8594;
+重新初始化本地的 git 倉儲 &amp;#8594;
+設定遠端 git 倉儲路徑 &amp;#8594;
+將檔案加入本地倉儲 &amp;#8594;
+強迫推送到遠端倉儲
+&lt;/p&gt;
+&lt;/div&gt;</description>
     </item>
     
   </channel>

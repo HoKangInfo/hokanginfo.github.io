@@ -5,7 +5,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-        <title>Disperse &middot; The Issue of the Day Before</title>
+        <title>Shell Output to Screen and File &middot; The Issue of the Day Before</title>
         
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6102554-1"></script>
 <script>
@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="/css/liquorice.css" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="/apple-icon-144x144.png" sizes="144x144" />
-        <link rel="alternate" href="/tags/disperse/index.xml" type="application/rss+xml" title="The Issue of the Day Before" />
+        <link rel="alternate" href="/" type="application/rss+xml" title="The Issue of the Day Before" />
     </head>
     <body class="li-body">
 
@@ -59,18 +59,80 @@
 </header>
 
 
+
+
+
+
     <div class="container">
         <div class="row gridpaper">
             <div class="sixteen columns">
-                <h1>Disperse</h1>
-                <ul class="li-article-list">
+                <article class="li-article">
+                    <header class="li-article-header">
+                        <h1 class="li-article-title">將標準輸出同時輸出到螢幕和檔案</h1>
+                        <span class="li-article-taxonomies">
+                            
+
+                            
+                                <i class="post-tags" alt="tags">
+                                
+                                    <a href="/tags/shell">shell</a>
+                                
+                                    <a href="/tags/tee">tee</a>
+                                
+                                </i>
+                            
+                        </span>
+                         - 
+                        <time class="li-article-date">2018-04-25</time>
+                    </header>
+                    <section>
+                        <div class="paragraph">
+<p>有時候我們看到螢幕上的輸出結果，希望能記錄下來。這時候可以使用重導輸出算子 <code>&gt;</code> 。
+例如使用 <code>ls &gt; out.txt</code> 將 <code>ls</code> 的結果寫到檔案 <code>out.txt</code> 上，但這樣我們在螢幕上便看不到結果。
+要看結果必須再用 <code>cat out.txt</code> 將檔案內容輸出到螢幕上。 這時候便可使用 <code>tee</code> 這個指令。
+</p>
+</div>
+<div class="paragraph">
+<p>利用管線 <code>|</code> 將螢幕上的輸出重導給 <code>tee</code>，<code>tee</code> 會保持螢幕輸出並將結果寫入檔案。
+<code>tee</code> 其效果就如同一個 T 型管線，接受一個輸入但有兩個輸出。</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ls | tee -a &lt;out.file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>-a</code> 參數是將結果附加到檔案，沒有的話，就會直接覆蓋檔案。就像重導輸出算子 <code>&gt;&gt;</code> 和 <code>&gt;</code> 的差別一樣。</p>
+</div>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+        <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2fshell-output-to-screen-and-file%2f"/>
+    </div>
+</div>
+
+
+        <div class="row li-pagination">
+            <div class="eight columns">
+                <div class="li-pagination-previous">
                     
-                        <li>
-                            <time class="li-article-date">2018-03-09</time>
-                            <h4><a href="/post/install-disperse-forward-proxy/">架設分散式的正向代理</a></h4>
-                        </li>
+                        &nbsp;
                     
-                </ul>
+                </div>
+            </div>
+            <div class="eight columns">
+                <div class="li-pagination-next">
+                    
+                        &gt;&gt;
+                        <a href="/post/shell-grep-ps-out-of-self/"> 使用 grep 過濾 ps 輸出 得到不包含自己的結果</a>
+                    
+                </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/shell-output-to-screen-and-file/</loc>
+    <lastmod>2018-04-25T08:37:08+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/shell-grep-ps-out-of-self/</loc>
+    <lastmod>2018-04-25T01:42:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/shell-filter-empty-line/</loc>
+    <lastmod>2018-04-24T07:07:20+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/install-hugo/</loc>
     <lastmod>2018-03-12T02:33:47+00:00</lastmod>
   </url>
@@ -25,6 +40,12 @@
   <url>
     <loc>/tags/asciidoctor/</loc>
     <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/awk/</loc>
+    <lastmod>2018-04-24T07:07:20+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -58,6 +79,12 @@
   </url>
   
   <url>
+    <loc>/tags/grep/</loc>
+    <lastmod>2018-04-25T01:42:22+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/haproxy/</loc>
     <lastmod>2018-03-09T06:01:24+00:00</lastmod>
     <priority>0</priority>
@@ -77,7 +104,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <lastmod>2018-04-25T08:37:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -88,14 +115,26 @@
   </url>
   
   <url>
+    <loc>/tags/shell/</loc>
+    <lastmod>2018-04-25T08:37:08+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2018-03-12T02:33:47+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>/tags/tee/</loc>
+    <lastmod>2018-04-25T08:37:08+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2018-03-12T02:33:47+00:00</lastmod>
+    <lastmod>2018-04-25T08:37:08+00:00</lastmod>
     <priority>0</priority>
   </url>
   

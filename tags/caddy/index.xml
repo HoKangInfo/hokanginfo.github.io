@@ -31,7 +31,14 @@
       <pubDate>Tue, 06 Mar 2018 06:50:38 +0000</pubDate>
       
       <guid>/post/install-caddy-as-forward-proxy-server/</guid>
-      <description>Sumary 到 Caddy Server 下載頁，選擇需要的 PLATFORM， PLUGINS 和適當的 LICENSE &amp;#8594; 複製 One-step installer script (bash) 內的指令到要安裝的主機上執行該指令 &amp;#8594; 設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server Why 除非 ISP 有</description>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;到 &lt;a href=&#34;https://caddyserver.com/download&#34;&gt;Caddy Server 下載頁&lt;/a&gt;，選擇主機的 PLATFORM(e.q. Linux 64-bit)，
+需要的 PLUGINS(e.q. hook.service, http.forwardproxy, http.ipfilter)
+和適當的 LICENSE(e.q. Personal) &amp;#8594;
+複製 &lt;code&gt;One-step installer script (bash)&lt;/code&gt; 內的指令到要安裝的主機上執行該指令 &amp;#8594;
+設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server
+&lt;/p&gt;
+&lt;/div&gt;</description>
     </item>
     
   </channel>

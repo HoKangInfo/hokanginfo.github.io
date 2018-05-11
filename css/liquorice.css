@@ -24,7 +24,7 @@
 
 /** Base ********************************************************************/
 body {
-    font-family: "Open Sans", "Helvetica Neue", "Helvetica", sans-serif;
+    font-family: "Open Sans", "Noto Sans TC", "Helvetica Neue", "Helvetica", sans-serif;
     color: #484644;
 }
 
@@ -40,6 +40,7 @@ a:visited {
 h1,h2,h3,h4,h5,h6 {
     color: #202020;
     font-weight: lighter;
+    font-family: "Open Sans","Noto Sans TC";
 }
 
 pre {
@@ -102,6 +103,42 @@ pre code {
     display: none;
 }
 
+.post-tags, .post-categories {
+    display: inline-block;
+    margin-left: .5rem;
+    text-align: right;
+    color: #666;
+    opacity: .6;
+    transition: opacity .3s ease-in-out;
+}
+
+.post-tags:hover, .post-categories:hover {
+    opacity: 1;
+}
+
+.post-tags::before {
+    content: "\f02c";
+    font-family: FontAwesome;
+}
+
+.post-categories::before {
+    content: "\f07b";
+    font-family: FontAwesome;
+}
+
+.post-tags a, .post-categories a {
+    text-decoration: none;
+    outline: none;
+    color: #666;
+    margin: 0 .3rem;
+    transition: border .2s ease-in-out;
+}
+
+.post-tags a:hover, .post-categories a:hover {
+    color: #333;
+    border-bottom: 2px solid #666;
+}
+
 /** Article *****************************************************************/
 .li-article {
     margin-bottom: 32px;
@@ -132,6 +169,12 @@ ul.li-article-list {
     font-size: smaller;
 }
 
+.li-article-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 32px;
+}
+
 .li-article-footer {
     border-top: 1px solid #ccc;
 }
@@ -139,7 +182,7 @@ ul.li-article-list {
 .li-pagination {
     border-top: 1px solid #ccc;
     margin-top: 32px;
-    padding: 16px 0px 16px 0px;    
+    padding: 16px 0px 16px 0px;
 }
 
 .li-pagination-previous {
