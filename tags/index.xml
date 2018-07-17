@@ -95,7 +95,7 @@
     <item>
       <title>Install</title>
       <link>/tags/install/</link>
-      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
+      <pubDate>Tue, 17 Jul 2018 03:45:18 +0000</pubDate>
       
       <guid>/tags/install/</guid>
       <description></description>
@@ -107,6 +107,15 @@
       <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
       
       <guid>/tags/proxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Puppeteer</title>
+      <link>/tags/puppeteer/</link>
+      <pubDate>Tue, 17 Jul 2018 03:45:18 +0000</pubDate>
+      
+      <guid>/tags/puppeteer/</guid>
       <description></description>
     </item>
     
