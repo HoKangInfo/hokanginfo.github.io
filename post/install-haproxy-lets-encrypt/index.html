@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="//www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+    <head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+        <title>Install Haproxy Lets Encrypt &middot; The Issue of the Day Before</title>
+        
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-6102554-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-6102554-1');
+</script>
+
+
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600'>
+        <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanstc.css"/>
+        <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/styles/tomorrow.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.12.0/build/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <link rel="stylesheet" href="/libraries/normalize.3.0.1.css" />
+        <link rel="stylesheet" href="/css/asciidoctor-default.css" />
+        <link rel="stylesheet" href="/css/themes.css" />
+        <link rel="stylesheet" href="/css/liquorice.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-icon-144x144.png" sizes="144x144" />
+        <link rel="alternate" href="/" type="application/rss+xml" title="The Issue of the Day Before" />
+    </head>
+    <body class="li-body">
+
+<header class="li-page-header">
+    <div class="container">
+        <div class="row">
+            <div class="sixteen columns">
+                <div class="li-brand li-left">
+                <a href="/">The Issue of the Day Before</a></div>
+                <div class="li-menu li-right">
+                    <span class="li-menu-icon" onclick="javascript:toggle('menu');">&#9776;</span>
+                    <ul id="menu2" class="li-menu-items">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen columns">
+                <ul id="menu" class="li-menu-items li-menu-mobile">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+    <div class="container">
+        <div class="row gridpaper">
+            <div class="sixteen columns">
+                <article class="li-article">
+                    <header class="li-article-header">
+                        <h1 class="li-article-title">讓 HAProxy 也可以 Let&#39;s Encrypt</h1>
+                        <span class="li-article-taxonomies">
+                            
+
+                            
+                        </span>
+                        
+                        <time class="li-article-date">2018-08-23</time>
+                    </header>
+                    <section>
+                        <div class="paragraph">
+<p>越來越多的服務要求使用 <code>https</code>, 在網路上混的 <code>HAProxy</code> 當然也要聲援一下.
+<code>HAProxy</code> 自從 <code>1.5</code> 版後就支援 <code>SSL</code>. 但每次到期要手動申請 <code>renew</code> 也是一項不人性的作業.
+不出意外, 只要有這種長時間後才要重複作業的工作, 一定會有 <code>莫非</code> 的出現.
+還好關於申請 ssl 證書有人推出了自動化服務, 特別它是免費的.
+<code>Let&#8217;s Encrypt</code> 在 2015 年底正式提供這個服務. 所以我們的目標便是將兩者整合在一起, 期快樂無比.
+</p>
+</div>
+<div class="paragraph">
+<p><a href="https://letsencrypt.org/">Let&#8217;s Encrypt</a> 首頁大大寫著
+<code>Let’s Encrypt is a free, automated, and open Certificate Authority.</code>
+不知你最先注意到的是 <code>free</code>, <code>open</code> 還是 <code>automated</code> .
+free 跟 open 應該是這個網路網路時代的顯學. 但很多人沒注意到的是 <code>automated(自動化)</code> 才是幕後功臣.</p>
+</div>
+<div class="paragraph">
+<p>然而畢竟是自動化, 總不能要自己還要複製貼上的輸入資料吧. 所以, 要讓你的 <code>Let&#8217;s Encrypt</code> 申請自動化,
+首先你的 Web Server 要支援
+<a href="https://github.com/ietf-wg-acme/acme">Automatic Certificate Management Environment</a> (ACME 目前還是草稿階段).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="diag 1d337c3ba1aa00fe134930ca74d12cc8" width="491" height="251">
+</div>
+</div>
+<div class="paragraph">
+<p>而現在要讓 <code>HAProxy</code> 支援 <code>ACME</code>, 但(臣妾)辦不到(目前). 或許你可以利用崁入式語言
+<code>Lua</code> 為他寫一個支援 <code>ACME</code> 的程式. 使用
+<code>haproxy -vv|grep Lua</code> 檢查你的 <code>HAproxy</code> 是否支援 <code>Lua</code>.
+不想如此麻煩, 就必須另外使用工具.
+<code>Let&#8217;s Encrypt</code> 推薦的首選工具是 <a href="https://certbot.eff.org"><code>certbot</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>現在我們要借用 <code>certbot</code> 來達成 <code>HAProxy</code> 支援 <code>ACME</code> 的功能.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="diag df79dc3b794d560106924e7b52ab3521" width="768" height="245">
+</div>
+</div>
+<div class="paragraph">
+<p>首先下載 <code>certbot</code>, 你可以簡單的使用 <code>sudo apt-get install certbot</code> 下載安裝現有的封裝版本.
+或註冊 <code>certbot</code> 的個人套件庫取得最新的版本.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ sudo apt-get update
+$ sudo apt-get -y install software-properties-common
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get -y install certbot</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>理所當然的你應該有一個合法的註冊網域和正在執行的 <code>HAProxy</code> 伺服器.</p>
+</div>
+<div class="sect1">
+<h2 id="_要求新授權證書">要求新授權證書</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>因為是要求新授權, 理所當然認為你現在沒有證書, 也就沒有辦法使用 <code>https</code>,
+所以 <code>Let&#8217;s Encrypt</code> 是透過 <code>port:80</code> 與 Client 溝通.
+我們可以將 <code>HAProxy</code> 設定成將透過 <code>port:80</code> 進來且路徑是
+ <code>/.well-known/acme-challenge/</code> 的 <code>request</code> 傳給 <code>certbot</code>.
+ 並選擇一個空的 <code>port number</code> 給 <code>certbot</code> 使用. 這裡使用的是 <code>port:8888</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">/etc/haproxy/haproxy.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-config" data-lang="config">frontend http
+    bind    *:80
+
+    acl acme path_beg /.well-known/acme-challenge/
+    use_backend acme-backend if acme
+
+backend acme-backend
+    server certbot 127.0.0.1:16523</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>改好 <code>HAProxy</code> 的設定檔後, 重新啟動 <code>HAProxy</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sudo certbot certonly --standalone -d your.domain.name \
+  --non-interactive --agree-tos \
+  --email yourAdmin@your.domain.name \
+  --http-01-port=16523</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>這裡的 <code>--http-01-port=16523</code> 要跟
+<code>HAProxy</code> 設定檔中 <code>server certbot 127.0.0.1:16523</code> 的 <code>port</code> 相同.</p>
+</div>
+<div class="paragraph">
+<p>成功會出現</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/your.domain.name/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/your.domain.name/privkey.pem
+   Your cert will expire on yyyy-mm-dd. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>之類的說明文字. 如果有出現錯誤, 請再依說明處理.</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre>IMPORTANT NOTES:
+ - The following errors were reported by the server:</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>將產生的兩個檔案 <code>/etc/letsencrypt/live/your.domain.name/fullchain.pem</code> 和
+<code>/etc/letsencrypt/live/your.domain.name/privkey.pem</code> 合併成一個檔案.
+要注意合併的先後順序.</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q./etc/ssl/your.domain.name/your.domain.name.pem</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ sudo mkdir -p /etc/ssl/
+
+$ sudo cat /etc/letsencrypt/live/your.domain.name/fullchain.pem \
+/etc/letsencrypt/live/your.domain.name/privkey.pem \
+| sudo tee /etc/ssl/your.domain.name/your.domain.name.pem</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>將該檔案設給 <code>HAProxy</code> 的 <code>ssl crt</code>.</p>
+</div>
+<div class="paragraph">
+<p>因為現有有了 ssl 證書, 所以我們可以將 <code>HAProxy</code> 監聽 <code>port 443</code> 的設定加上.
+同時現在也可以對 <code>Let&#8217;s Encrypt</code> 要求 <code>renew</code> 了. 當然因為是 <code>renew</code> 所以
+<code>ACME</code> 是透過 <code>443 port</code> 來要求的.</p>
+</div>
+<div class="listingblock">
+<div class="title">/etc/haproxy/haproxy.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-config" data-lang="config">frontend https
+    bind    *:443 ssl crt /etc/ssl/your.domain.name/your.domain.name.pem
+
+    acl acme path_beg /.well-known/acme-challenge/
+    use_backend acme-backend if acme</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>改好 <code>HAProxy</code> 的設定檔後, 重新啟動 <code>HAProxy</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_要求更新授權證書">要求更新授權證書</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>certbot</code> 要求更新證書是很簡單的. 只要執行 <code>certbot renew</code>,
+其他參數都會延續之前要求新授權證書時的設定.
+但因為我們現在是透過 <code>HAProxy</code> 來轉給 <code>certbot</code>, 所以跟之前監聽 <code>port 443</code> 一樣,
+必須把 <code>443 port</code> 下, 路徑是 <code>/.well-known/acme-challenge/</code> 轉給 <code>certbot</code> 處理.</p>
+</div>
+<div class="paragraph">
+<p><code>Let&#8217;s Encrypt</code> 發的證書, 有效是 <code>90</code> 天, 而 <code>certbot</code> 並不是系統常駐程式,
+而是做完工作就結束了. 所以我們必須在到期前, 再執行一次 <code>certbot renew</code>, 取得新證書,
+並讓 <code>HAProxy</code> 載入新證書, 才不會過期.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">$ sudo /usr/bin/certbot renew
+  --force-renewal \ <b class="conum">(1)</b>
+  --tls-sni-01-port=16523 \ <b class="conum">(2)</b>
+  --renew-hook &lt;renew 後要執行 service haproxy reload&gt; <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>--force-renewal</code> 要求強迫更新證書, 提前強迫更新證書可以避免有證書斷層.</p>
+</li>
+<li>
+<p><code>--tls-sni-01-port=&lt;port&gt;</code> 指示 <code>certbot</code> 在 <code>HAProxy</code> 導過來的 port 工作.</p>
+</li>
+<li>
+<p><code>--renew-hook</code> 指示當 <code>renew</code> 成功後要執行的 <code>script</code>. 也就是合併檔案, 重新啟動 <code>HAProxy</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>同樣的將產生的兩個檔案合併, 然後重新啟動 <code>HAProxy</code>.</p>
+</div>
+<div class="paragraph">
+<p>最後將上述指令設定給 <code>crontab</code> 來定時執行, 即可.
+例如, 在每個月的1號凌晨1點執行 <code>renew.sh</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-crontab" data-lang="crontab">*m h dom mon dow   command
+0 1 1 * * renew.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>crontab renew</code> 成功後要執行的 <code>script</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">hook.sh</div>
+<div class="content">
+<pre>domain="api.accunix.net"
+
+fullchain="/etc/letsencrypt/live/${domain}/fullchain.pem"
+privkey="/etc/letsencrypt/live/${domain}/privkey.pem"
+target="/etc/ssl/${domain}/${domain}.pem"
+
+if sudo [ -f ${fullchain} ] &amp;&amp; sudo [ -f ${privkey} ]; then
+    dir="/etc/ssl/${domain}"
+    if sudo [ ! -d ${dir} ]; then
+        sudo mkdir -p ${dir}
+    fi
+    sudo cat ${fullchain} ${privkey} | sudo tee ${target}
+
+    sudo service haproxy reload
+fi</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>crontab</code> 要執行的 <code>script</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">renew.sh</div>
+<div class="content">
+<pre>#!/bin/bash
+
+cwd=$(cd `dirname $0`; pwd -P)
+
+port="16523"
+hook="${cwd}/hook.sh"
+
+sudo /usr/bin/certbot renew --force-renewal --tls-sni-01-port=${port} --renew-hook ${hook}</pre>
+</div>
+</div>
+</div>
+</div>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+        <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fpost%2finstall-haproxy-lets-encrypt%2f"/>
+    </div>
+</div>
+
+
+        <div class="row li-pagination">
+            <div class="eight columns">
+                <div class="li-pagination-previous">
+                    
+                        &nbsp;
+                    
+                </div>
+            </div>
+            <div class="eight columns">
+                <div class="li-pagination-next">
+                    
+                        &gt;&gt;
+                        <a href="/post/install-puppeteer/"> 在 Linux 上安裝 Puppeteer</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="li-page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="sixteen columns">
+                <div class="li-page-footer-legal">
+                    &copy; 2018. All rights reserved. 
+                </div>
+                <div class="li-page-footer-theme">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script type="text/javascript">
+    <!--
+    function toggle(id) {
+        var e = document.getElementById(id);
+        e.style.display == 'block' ? e.style.display = 'none' : e.style.display = 'block';
+    }
+    
+    </script>
+    </body>
+</html>
+

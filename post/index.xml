@@ -6,10 +6,26 @@
     <description>Recent content in Posts on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 17 Jul 2018 03:45:18 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Aug 2018 07:09:55 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Install Haproxy Lets Encrypt</title>
+      <link>/post/install-haproxy-lets-encrypt/</link>
+      <pubDate>Thu, 23 Aug 2018 07:09:55 +0000</pubDate>
+      
+      <guid>/post/install-haproxy-lets-encrypt/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;越來越多的服務要求使用 &lt;code&gt;https&lt;/code&gt;, 在網路上混的 &lt;code&gt;HAProxy&lt;/code&gt; 當然也要聲援一下.
+&lt;code&gt;HAProxy&lt;/code&gt; 自從 &lt;code&gt;1.5&lt;/code&gt; 版後就支援 &lt;code&gt;SSL&lt;/code&gt;. 但每次到期要手動申請 &lt;code&gt;renew&lt;/code&gt; 也是一項不人性的作業.
+不出意外, 只要有這種長時間後才要重複作業的工作, 一定會有 &lt;code&gt;莫非&lt;/code&gt; 的出現.
+還好關於申請 ssl 證書有人推出了自動化服務, 特別它是免費的.
+&lt;code&gt;Let&amp;#8217;s Encrypt&lt;/code&gt; 在 2015 年底正式提供這個服務. 所以我們的目標便是將兩者整合在一起, 期快樂無比.
+&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Install Puppeteer</title>
