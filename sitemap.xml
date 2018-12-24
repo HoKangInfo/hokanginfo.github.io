@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/install-ubuntu-nginx-fpm-mysql/</loc>
+    <lastmod>2018-12-24T05:40:26+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/install-haproxy-lets-encrypt/</loc>
     <lastmod>2018-08-23T07:09:55+00:00</lastmod>
   </url>
@@ -114,7 +119,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-08-23T07:09:55+00:00</lastmod>
+    <lastmod>2018-12-24T05:40:26+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -150,7 +155,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-23T07:09:55+00:00</lastmod>
+    <lastmod>2018-12-24T05:40:26+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,10 +6,19 @@
     <description>Recent content on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Thu, 23 Aug 2018 07:09:55 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Dec 2018 05:40:26 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Install Ubuntu &#43; Nginx &#43; PHP-fpm &#43; Mysql</title>
+      <link>/post/install-ubuntu-nginx-fpm-mysql/</link>
+      <pubDate>Mon, 24 Dec 2018 05:40:26 +0000</pubDate>
+      
+      <guid>/post/install-ubuntu-nginx-fpm-mysql/</guid>
+      <description>Install Nginx 參看 Nginx 安裝指南 說明安裝或依下列步驟安裝. &amp;gt; sudo apt-get update &amp;gt; lsb_release -a| grep Codename // Codename: bionic &amp;gt; sudo wget https://nginx.org/keys/nginx_signing.key &amp;gt; sudo apt-key add nginx_signing.key (1) &amp;gt; sudo echo &#39;deb https://nginx.org/packages/mainline/ubuntu/ bionic nginx&#39; &amp;gt;&amp;gt; /etc/apt/sources.list &amp;gt; sudo echo &#39;deb-src https://nginx.org/packages/mainline/ubuntu/ bionic nginx&#39; &amp;gt;&amp;gt; /etc/apt/sources.list (2) &amp;gt; sudo apt-get remove nginx-common (3) &amp;gt;</description>
+    </item>
     
     <item>
       <title>Install Haproxy Lets Encrypt</title>
