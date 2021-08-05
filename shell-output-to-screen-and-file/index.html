@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Shell Output to Screen and File &middot; The Issue of the Day Before</title>
+  <link rel="stylesheet" href="/css/azure.css" />
+  <link rel="stylesheet" href="/css/asciidoctor-default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <style type="text/css">
+  </style>
+</head>
+
+<body class="normalize">
+  <header class="header">
+    
+    <a class="title" href="/">The Issue of the Day Before</a>
+  </header>
+  <nav class="main-nav">
+    
+    
+    
+  </nav>
+  <article class="main gridpaper container">
+    
+
+
+
+
+  <article class="li-article">
+    <header class="li-article-header">
+      <h1 class="li-article-title">將標準輸出同時輸出到螢幕和檔案</h1>
+      <span class="li-article-taxonomies">
+        
+
+        
+        <i class="post-tags" alt="tags">
+          
+          <a href="/tags/shell">shell</a>
+          
+          <a href="/tags/tee">tee</a>
+          
+        </i>
+        
+      </span>
+       - 
+      <time class="li-article-date">2018-04-25</time>
+    </header>
+    <section class="section">
+      <div class="paragraph">
+<p>有時候我們看到螢幕上的輸出結果，希望能記錄下來。這時候可以使用重導輸出算子 <code>&gt;</code> 。
+例如使用 <code>ls &gt; out.txt</code> 將 <code>ls</code> 的結果寫到檔案 <code>out.txt</code> 上，但這樣我們在螢幕上便看不到結果。
+要看結果必須再用 <code>cat out.txt</code> 將檔案內容輸出到螢幕上。 這時候便可使用 <code>tee</code> 這個指令。</p>
+</div>
+<div class="paragraph">
+<p>利用管線 <code>|</code> 將螢幕上的輸出重導給 <code>tee</code>，<code>tee</code> 會保持螢幕輸出並將結果寫入檔案。
+<code>tee</code> 其效果就如同一個 T 型管線，接受一個輸入但有兩個輸出。</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; ls | tee -a &lt;out.file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>-a</code> 參數是將結果附加到檔案，沒有的話，就會直接覆蓋檔案。就像重導輸出算子 <code>&gt;&gt;</code> 和 <code>&gt;</code> 的差別一樣。</p>
+</div>
+    </section>
+  </article>
+
+  <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="https://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fshell-output-to-screen-and-file%2f"/>
+    </div>
+</div>
+
+
+  <div class="row li-pagination">
+    <div class="eight columns">
+      <div class="li-pagination-previous">
+        
+        <a href="/shell-grep-ps-out-of-self/"> 使用 grep 過濾 ps 輸出 得到不包含自己的結果</a>
+        &lt;&lt;
+        
+      </div>
+    </div>
+    <div class="eight columns">
+      <div class="li-pagination-next">
+        
+        &gt;&gt;
+        <a href="/install-puppeteer/"> 在 Linux 上安裝 Puppeteer</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  </article>
+  <aside class="side">
+    
+    
+    
+  </aside>
+  <div class="ad">
+    
+    
+    
+  </div>
+  <footer class="footer">
+    &copy; 2021. All rights reserved. 
+  </footer>
+</body>
+
+</html>

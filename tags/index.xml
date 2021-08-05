@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on The Issue of the Day Before</title>
@@ -6,107 +6,17 @@
     <description>Recent content in Tags on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 12 Mar 2018 02:33:47 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jul 2018 03:45:18 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Asciidoctor</title>
-      <link>/tags/asciidoctor/</link>
-      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
-      
-      <guid>/tags/asciidoctor/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Awk</title>
-      <link>/tags/awk/</link>
-      <pubDate>Tue, 24 Apr 2018 07:07:20 +0000</pubDate>
-      
-      <guid>/tags/awk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Caddy</title>
-      <link>/tags/caddy/</link>
-      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
-      
-      <guid>/tags/caddy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Disperse</title>
-      <link>/tags/disperse/</link>
-      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
-      
-      <guid>/tags/disperse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Forward</title>
-      <link>/tags/forward/</link>
-      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
-      
-      <guid>/tags/forward/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Git</title>
-      <link>/tags/git/</link>
-      <pubDate>Mon, 29 Jan 2018 02:24:16 +0000</pubDate>
-      
-      <guid>/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Grep</title>
-      <link>/tags/grep/</link>
-      <pubDate>Wed, 25 Apr 2018 01:42:22 +0000</pubDate>
-      
-      <guid>/tags/grep/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Haproxy</title>
-      <link>/tags/haproxy/</link>
-      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
-      
-      <guid>/tags/haproxy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
-      
-      <guid>/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Install</title>
+      <title>install</title>
       <link>/tags/install/</link>
       <pubDate>Tue, 17 Jul 2018 03:45:18 +0000</pubDate>
       
       <guid>/tags/install/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Proxy</title>
-      <link>/tags/proxy/</link>
-      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
-      
-      <guid>/tags/proxy/</guid>
       <description></description>
     </item>
     
@@ -120,7 +30,7 @@
     </item>
     
     <item>
-      <title>Shell</title>
+      <title>shell</title>
       <link>/tags/shell/</link>
       <pubDate>Wed, 25 Apr 2018 08:37:08 +0000</pubDate>
       
@@ -129,11 +39,101 @@
     </item>
     
     <item>
-      <title>Tee</title>
+      <title>tee</title>
       <link>/tags/tee/</link>
       <pubDate>Wed, 25 Apr 2018 08:37:08 +0000</pubDate>
       
       <guid>/tags/tee/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grep</title>
+      <link>/tags/grep/</link>
+      <pubDate>Wed, 25 Apr 2018 01:42:22 +0000</pubDate>
+      
+      <guid>/tags/grep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>awk</title>
+      <link>/tags/awk/</link>
+      <pubDate>Tue, 24 Apr 2018 07:07:20 +0000</pubDate>
+      
+      <guid>/tags/awk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>asciidoctor</title>
+      <link>/tags/asciidoctor/</link>
+      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
+      
+      <guid>/tags/asciidoctor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
+      
+      <guid>/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>caddy</title>
+      <link>/tags/caddy/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/tags/caddy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>disperse</title>
+      <link>/tags/disperse/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/tags/disperse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>forward</title>
+      <link>/tags/forward/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/tags/forward/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haproxy</title>
+      <link>/tags/haproxy/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/tags/haproxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>proxy</title>
+      <link>/tags/proxy/</link>
+      <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
+      
+      <guid>/tags/proxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>/tags/git/</link>
+      <pubDate>Mon, 29 Jan 2018 02:24:16 +0000</pubDate>
+      
+      <guid>/tags/git/</guid>
       <description></description>
     </item>
     

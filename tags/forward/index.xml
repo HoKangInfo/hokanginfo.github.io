@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Forward on The Issue of the Day Before</title>
+    <title>forward on The Issue of the Day Before</title>
     <link>/tags/forward/</link>
-    <description>Recent content in Forward on The Issue of the Day Before</description>
+    <description>Recent content in forward on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Fri, 09 Mar 2018 06:01:24 +0000</lastBuildDate>
@@ -13,31 +13,29 @@
     
     <item>
       <title>install disperse forward proxy</title>
-      <link>/post/install-disperse-forward-proxy/</link>
+      <link>/install-disperse-forward-proxy/</link>
       <pubDate>Fri, 09 Mar 2018 06:01:24 +0000</pubDate>
       
-      <guid>/post/install-disperse-forward-proxy/</guid>
+      <guid>/install-disperse-forward-proxy/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;下載 Caddy Server 和 HAProxy &amp;#8594;
 設定 Caddy Server 為 Forward Proxy Server &amp;#8594;
-設定 HAProxy 為 Reverse Proxy Server 並指向 Caddy Server
-&lt;/p&gt;
+設定 HAProxy 為 Reverse Proxy Server 並指向 Caddy Server&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     
     <item>
       <title>install caddy as forward proxy server</title>
-      <link>/post/install-caddy-as-forward-proxy-server/</link>
+      <link>/install-caddy-as-forward-proxy-server/</link>
       <pubDate>Tue, 06 Mar 2018 06:50:38 +0000</pubDate>
       
-      <guid>/post/install-caddy-as-forward-proxy-server/</guid>
+      <guid>/install-caddy-as-forward-proxy-server/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;到 &lt;a href=&#34;https://caddyserver.com/download&#34;&gt;Caddy Server 下載頁&lt;/a&gt;，選擇主機的 PLATFORM(e.q. Linux 64-bit)，
 需要的 PLUGINS(e.q. hook.service, http.forwardproxy, http.ipfilter)
 和適當的 LICENSE(e.q. Personal) &amp;#8594;
 複製 &lt;code&gt;One-step installer script (bash)&lt;/code&gt; 內的指令到要安裝的主機上執行該指令 &amp;#8594;
-設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server
-&lt;/p&gt;
+設定 Caddy Server 設定檔 &amp;#8594; 執行 Caddy Server&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

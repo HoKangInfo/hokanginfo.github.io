@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on The Issue of the Day Before</title>
+    <title>hugo on The Issue of the Day Before</title>
     <link>/tags/hugo/</link>
-    <description>Recent content in Hugo on The Issue of the Day Before</description>
+    <description>Recent content in hugo on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Mon, 12 Mar 2018 02:33:47 +0000</lastBuildDate>
@@ -13,14 +13,13 @@
     
     <item>
       <title>install hugo</title>
-      <link>/post/install-hugo/</link>
+      <link>/install-hugo/</link>
       <pubDate>Mon, 12 Mar 2018 02:33:47 +0000</pubDate>
       
-      <guid>/post/install-hugo/</guid>
+      <guid>/install-hugo/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
 &lt;p&gt;安裝 asciidoctor &amp;#8594;
-安裝 hugo
-&lt;/p&gt;
+安裝 hugo&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

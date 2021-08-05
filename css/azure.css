@@ -1,0 +1,241 @@
+body>header {
+  grid-area: hd;
+  /* align-self: start; */
+  justify-self: stretch;
+}
+
+body>footer {
+  grid-area: ft;
+  /* align-self: center; */
+  justify-self: stretch;
+  color: #888;
+}
+
+body>article.main {
+  grid-area: main;
+  justify-self: stretch;
+  /* overflow: auto; */
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+body>aside.side {
+  grid-area: sd;
+}
+
+body>nav.main-nav {
+  grid-area: nav;
+}
+
+body>div.ad {
+  grid-area: ad;
+}
+
+body {
+  display: grid;
+  /* gap: 1em; */
+
+  min-height: 100vh;
+  height: 100vh;
+
+  grid-template-areas:
+    "hd"
+    "nav"
+    "main"
+    "sd"
+    "ad"
+    "ft";
+}
+
+body.normalize {
+  margin: 0;
+}
+
+body>header.header {
+  background-color: #202020;
+  color: #fff;
+  padding: 32px 0px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "logo  title";
+  /* text-align: center; */
+}
+
+body>header.header>.title {
+  grid-area: title;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: auto
+}
+
+body>header.header>.logo {
+  grid-area: logo;
+}
+
+body>footer.footer {
+  background-color: #202020;
+  color: #fff;
+  font-size: smaller;
+  padding: 32px 0px;
+  text-align: center;
+}
+
+.gridpaper {
+  background: white;
+  width: 100%;
+  padding-top: 32px;
+  background-image:
+    linear-gradient(rgba(220, 220, 220, 0.4) 1px, transparent 0),
+    linear-gradient(90deg, rgba(220, 220, 220, 0.4) 1px, transparent 0),
+    linear-gradient(#e4e7e3 1px, transparent 0),
+    linear-gradient(90deg, #e4e7e3 1px, transparent 0),
+    linear-gradient(rgba(100, 160, 240, 0.1) 1px, transparent 0),
+    linear-gradient(90deg, rgba(100, 161, 240, 0.1) 1px, transparent 0);
+  background-size:
+    15px 15px,
+    15px 15px,
+    75px 75px,
+    75px 75px;
+}
+
+.title>a,
+a:active,
+a:hover,
+a:visited {
+  color: #202020;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.anchor {
+  position: relative;
+}
+
+.summary {
+  /* display: inline; */
+  /* float: left; */
+}
+
+.tail {
+  text-align: end;
+}
+
+.pagination {
+  font-size: 1rem;
+  margin: .25rem;
+}
+
+.pagination,
+.pagination-list {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+
+.page-item {
+  display: inline;
+  width: 32px;
+  height: 32px;
+  background: rgba(192, 192, 192, 0.3);
+  border-radius: 50%;
+  box-shadow: -3px 3px 3px 0px gray;
+
+}
+
+.page-item>a,
+a:active,
+a:hover,
+a:visited {
+  color: #202020;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.page-item.disabled,
+.page-link.disabled {
+  cursor: not-allowed;
+  background-color: #dbdbdb;
+  border-color: #dbdbdb;
+  box-shadow: none;
+  color: #7a7a7a;
+  opacity: 0.3;  
+}
+
+.page-item.active {
+  width: 34px;
+  height: 34px;  
+  background: rgba(192, 192, 192, 0.7);
+  box-shadow: -4px 3px 3px 0px gray;
+  /* outline: none; */
+}
+
+@media (min-width: 500px) {
+  body {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "hd   hd"
+      "nav nav"
+      "sd main"
+      "ad   ft";
+  }
+
+  .postit {
+    z-index: 9;
+    float: left;
+    top: 20px;
+    left: -135px;
+    width: 140px;
+    height: 40px;
+    background: rgba(210, 225, 238, 0.65);
+    position: absolute;
+    border-top: 3px solid transparent;
+    border-left: 5px solid white;
+    border-bottom: 10px solid transparent;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transform: skew(0deg, -0.3deg);
+    vertical-align: bottom;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+  }
+
+  .postit:after {
+    clear: both;
+    content: "";
+    position: absolute;
+    right: 7%;
+    top: 2px;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: -3px 3px 3px 0px gray;
+  }
+
+  .pagination {
+    justify-content: space-evenly;
+  }
+}
+
+@media (min-width: 700px) {
+  body {
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas:
+      "hd  hd   hd"
+      "nav main sd"
+      "nav main ad"
+      "ft  ft   ft";
+  }
+
+  .pagination {
+    justify-content: space-between;
+  }
+}

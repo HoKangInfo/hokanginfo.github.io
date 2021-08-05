@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Awk on The Issue of the Day Before</title>
+    <title>awk on The Issue of the Day Before</title>
     <link>/tags/awk/</link>
-    <description>Recent content in Awk on The Issue of the Day Before</description>
+    <description>Recent content in awk on The Issue of the Day Before</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Tue, 24 Apr 2018 07:07:20 +0000</lastBuildDate>
@@ -13,13 +13,12 @@
     
     <item>
       <title>Shell Filter Empty Line</title>
-      <link>/post/shell-filter-empty-line/</link>
+      <link>/shell-filter-empty-line/</link>
       <pubDate>Tue, 24 Apr 2018 07:07:20 +0000</pubDate>
       
-      <guid>/post/shell-filter-empty-line/</guid>
+      <guid>/shell-filter-empty-line/</guid>
       <description>&lt;div class=&#34;paragraph&#34;&gt;
-&lt;p&gt;在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 &lt;code&gt;awk&lt;/code&gt; 來處理。
-&lt;/p&gt;
+&lt;p&gt;在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 &lt;code&gt;awk&lt;/code&gt; 來處理。&lt;/p&gt;
 &lt;/div&gt;</description>
     </item>
     

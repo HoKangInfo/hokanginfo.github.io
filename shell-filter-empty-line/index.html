@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Shell Filter Empty Line &middot; The Issue of the Day Before</title>
+  <link rel="stylesheet" href="/css/azure.css" />
+  <link rel="stylesheet" href="/css/asciidoctor-default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <style type="text/css">
+  </style>
+</head>
+
+<body class="normalize">
+  <header class="header">
+    
+    <a class="title" href="/">The Issue of the Day Before</a>
+  </header>
+  <nav class="main-nav">
+    
+    
+    
+  </nav>
+  <article class="main gridpaper container">
+    
+
+
+
+
+  <article class="li-article">
+    <header class="li-article-header">
+      <h1 class="li-article-title">使用 awk 命令去掉文字檔中的空行</h1>
+      <span class="li-article-taxonomies">
+        
+
+        
+        <i class="post-tags" alt="tags">
+          
+          <a href="/tags/shell">shell</a>
+          
+          <a href="/tags/awk">awk</a>
+          
+        </i>
+        
+      </span>
+       - 
+      <time class="li-article-date">2018-04-24</time>
+    </header>
+    <section class="section">
+      <div class="paragraph">
+<p>在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 <code>awk</code> 來處理。</p>
+</div>
+<div class="sect1">
+<h2 id="_what">What</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">awk</dt>
+<dd>
+<p>Linux 及 Unix 環境中的一種的純文本處理工具。概念是把文字檔當作表格來處理。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how">How</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_有非空白以外的字元才處理">有非空白以外的字元才處理</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk NF &lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>awk</code> 的簡單的語法結構為 <code>awk [Pattern] '[{Actions}]' [Files]</code>，
+<code>awk</code> 會依據 <code>Pattern</code> 傳回值來決定要不要處理，如果省略就表示每一行都會處理。
+而如果 <code>'{Actions}'</code> 省略內定為 <code>'{print $0}'</code>，就是印出整行文字。
+沒有以 <code>-F fs</code> 指定欄位分隔符號時，內定是一個以上的空白(<code>/[\s\t]+/</code>)來分隔欄位，<code>NF</code> 表示為目前該行的欄位數。
+且 <code>awk</code> 會省略頭尾空白。</p>
+</div>
+<div class="paragraph">
+<p>所以，上述的 <code>awk NF</code> 指令的意思為如果有欄位就把該行印出來。</p>
+</div>
+<div class="paragraph">
+<p>用 <code>javascript</code> 來寫就約等於</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var line = '';
+(line.trim().split(/[\s\t]+/).filter(x=&gt;x.length).length) &amp;&amp; console.log(line)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>當然，上述程式碼還要加上讀檔的部分才能達到跟 <code>awk NF</code> 差不多的功能。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_有空白字元也算">有空白字元也算</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk /./ &lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Pattern</code> 可以為正規表示式，所以 <code>awk /./</code> 的意思為如果有任何換行符號之外的字元就把該行印出來。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_去除註解">去除註解</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; awk '!/^\s*#/' &lt;file&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>同理，可以利用來去掉程式碼中的註解。
+<code>Pattern</code> 最好用單引號 <code>'</code> 括起來，以避免 <code>awk</code> 無法辨識。語法結構表示為`awk 'Pattern {Actions}'`。</p>
+</div>
+</div>
+</div>
+</div>
+    </section>
+  </article>
+
+  <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="https://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2fshell-filter-empty-line%2f"/>
+    </div>
+</div>
+
+
+  <div class="row li-pagination">
+    <div class="eight columns">
+      <div class="li-pagination-previous">
+        
+        <a href="/install-hugo/"> 安裝支援 asciidoc 語法的 hugo</a>
+        &lt;&lt;
+        
+      </div>
+    </div>
+    <div class="eight columns">
+      <div class="li-pagination-next">
+        
+        &gt;&gt;
+        <a href="/shell-grep-ps-out-of-self/"> 使用 grep 過濾 ps 輸出 得到不包含自己的結果</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  </article>
+  <aside class="side">
+    
+    
+    
+  </aside>
+  <div class="ad">
+    
+    
+    
+  </div>
+  <footer class="footer">
+    &copy; 2021. All rights reserved. 
+  </footer>
+</body>
+
+</html>
