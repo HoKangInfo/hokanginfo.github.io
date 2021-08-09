@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>install caddy as forward proxy server &middot; The Issue of the Day Before</title>
+  <link rel="stylesheet" href="/css/azure.css" />
+  <link rel="stylesheet" href="/css/asciidoctor-default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <style type="text/css">
+  </style>
+</head>
+
+<body class="normalize">
+  <header class="header">
+    
+    <a class="title" href="/">The Issue of the Day Before</a>
+  </header>
+  <nav class="main-nav">
+    
+    
+    
+  </nav>
+  <article class="main gridpaper container">
+    
+
+
+
+
+  <article class="li-article">
+    <header class="li-article-header">
+      <h1 class="li-article-title">將 Caddy 安裝成正向代理伺服器</h1>
+      <span class="li-article-taxonomies">
+        
+
+        
+        <i class="post-tags" alt="tags">
+          
+          <a href="/tags/install">install</a>
+          
+          <a href="/tags/caddy">caddy</a>
+          
+          <a href="/tags/forward">forward</a>
+          
+          <a href="/tags/proxy">proxy</a>
+          
+        </i>
+        
+      </span>
+       - 
+      <time class="li-article-date">2018-03-06</time>
+    </header>
+    <section class="section">
+      <div class="paragraph">
+<p>到 <a href="https://caddyserver.com/download">Caddy Server 下載頁</a>，選擇主機的 PLATFORM(e.q. Linux 64-bit)，
+需要的 PLUGINS(e.q. hook.service, http.forwardproxy, http.ipfilter)
+和適當的 LICENSE(e.q. Personal) &#8594;
+複製 <code>One-step installer script (bash)</code> 內的指令到要安裝的主機上執行該指令 &#8594;
+設定 Caddy Server 設定檔 &#8594; 執行 Caddy Server</p>
+</div>
+<div class="sect1">
+<h2 id="_why">Why</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>除非 ISP 有提供，要找到一個免費又穩定的的 Proxy Server 著實是一個問題。
+實在找不到也只能自己架設一個。但動不動就要架設並管理一個老舊又效率不彰的
+<a href="http://www.squid-cache.org">Squid</a> 或要搞清楚
+<a href="https://httpd.apache.org/docs/2.4/mod/mod_proxy.html">Apache (with mod_proxy)</a> 的設定也實在是一個麻煩。而
+<a href="https://nginx.org">Nginx</a> 雖然在反向代理上優秀，但正向代理上卻是問題多多，或可以試試
+<a href="https://github.com/chobits/ngx_http_proxy_connect_module">Nginx (module provides "CONNECT" HTTP method)</a> 模組來幫忙。
+<a href="http://www.haproxy.org">HAProxy</a> 可以算是神兵利器，但
+<a href="https://cbonte.github.io/haproxy-dconv/1.9/configuration.html#4-option%20http_proxy">HAProxy(option http_proxy)</a>
+只支援純 IP 的位址，不解析 DNS，神功廢掉大半，用途受限。</p>
+</div>
+<div class="paragraph">
+<p>查了半天資料，最後決定用 Caddy Server，雖然他也沒直接支援 Forward Proxy，但還好有
+<a href="https://caddyserver.com/docs/http.forwardproxy">Caddy(plugin http.forwardproxy)</a>。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what">What</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Caddy Server</dt>
+<dd>
+<p><a href="https://caddyserver.com">Caddy</a> 是使用 <a href="https://golang.org">GoLang</a> 編寫的 Web 伺服器，
+一般常用來建立反向代理(Reverse proxy)或靜態網頁伺服器。
+以設定簡單和自動簽發 HTTPS 證書為賣點。
+<a href="https://letsencrypt.org">Let&#8217;s Encrypt</a> 是默認的證書頒發機構。</p>
+</dd>
+<dt class="hdlist1">Forward proxy</dt>
+<dd>
+<p>代理伺服器會接收客戶端傳送的請求後轉發給其他伺服器。
+代理伺服器不會改變客戶端的請求 URI，在直接傳送給前方持有資源的目標伺服器後，取回資源再送回給客戶端。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how">How</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_取得_caddy_執行檔">取得 Caddy 執行檔</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>到 Caddy Server <a href="https://caddyserver.com/download">下載頁面</a></p>
+</li>
+<li>
+<p>選擇需要的 PLATFORM 和 PLUGINS</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Choose platform: Linux 64-bit (or your OS)</p>
+</li>
+<li>
+<p>Choose your plugins: Add plugins</p>
+<div class="ulist">
+<ul>
+<li>
+<p>hook.service: 以 service 執行</p>
+</li>
+<li>
+<p>http.forwardproxy: 正向代理插件</p>
+</li>
+<li>
+<p>http.ipfilter: 過濾查詢請求的 IP</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Choose license: Personal (free)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>下載檔案(兩個方法)</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Direct link to download</dt>
+<dd>
+<p>透過下載連結取得壓縮檔，複製輸入欄內的 URL，透過瀏覽器或 <code>wget</code> 之類的指令下載。<br>
+壓縮檔根據平台選擇有不同的類型:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows: zip</p>
+</li>
+<li>
+<p>Linux: tag.gz</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">One-step installer script (bash)</dt>
+<dd>
+<p>直接複製輸入欄內的指令，透過 <code>curl</code> 執行，即可。(OS 上必須有支援 curl)</p>
+</dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; curl https://getcaddy.com | bash -s personal hook.service,http.forwardproxy,http.ipfilter</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_設定">設定</h3>
+<div class="paragraph">
+<p>編輯 caddy server 的設定檔。</p>
+</div>
+<div class="paragraph">
+<p>沒有以 <code>-conf &lt;path&gt;</code> 指定設定檔時，內定是工作路徑下約定俗成的 <code>Caddyfile</code>。</p>
+</div>
+<div class="listingblock">
+<div class="title">Caddyfile</div>
+<div class="content">
+<pre class="highlight"><code>host:port {                     // <b class="conum">(1)</b>
+    root /home/www              // <b class="conum">(2)</b>
+    ipfilter / {                // <b class="conum">(3)</b>
+        rule allow
+        ip xxx.xxx.xxx.xxx/xx   // <b class="conum">(4)</b>
+    }
+    forwardproxy {
+        hide_ip                 // <b class="conum">(5)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>提供服務的網址， <code>host</code> 可以省略，只指定服務傾聽的埠 <code>:port</code> 內定會是 2015</p>
+</li>
+<li>
+<p>指定網站根目錄的路徑，因為只是代理沒有提供資源，所以可省略，內定會是工作路徑</p>
+</li>
+<li>
+<p>啟用 ipfilter, 網址路徑吻合 <code>/</code> 都要符合下面的過濾原則</p>
+</li>
+<li>
+<p>設定可使用 proxy server 的客戶端 IP 或 IP 範圍，建議設定為只有內部私有 IP 可以存取</p>
+</li>
+<li>
+<p>啟用 forward proxy 並隱藏客戶端來源 IP</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_啟用">啟用</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_直接執行">直接執行</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; sudo caddy</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_指定設定檔執行">指定設定檔執行</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; sudo caddy -conf &lt;path/Caddyfile&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_以_service_執行">以 service 執行</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; sudo caddy -service install  // <b class="conum">(1)</b>
+&gt; sudo caddy -service start    // <b class="conum">(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>第一次必須先將 Caddy 安裝成服務</p>
+</li>
+<li>
+<p>以服務啟動</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_以_service_執行並指定設定檔">以 service 執行並指定設定檔</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; sudo caddy -service install -conf &lt;path&gt; // <b class="conum">(1)</b>
+&gt; sudo caddy -service start</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>安裝成服務時指定設定檔，如果已經初始化過可以先 <code>caddy -service uninstall</code> 再安裝</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_behind">Behind</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>一台不夠，那就來三台吧。</p>
+</div>
+<div class="paragraph">
+<p>Caddy 天生就可以架反向代理(Reverse proxy)伺服器。只要前面架一個反向代理指向後面多台的正向代理，那不就完美了。
+但事不從人願，Caddy 在轉發時會移除 request 的 Host。所以後面的正向代理伺服器也就不知道要轉送給哪一台主機要求資源。
+所以，你得找一個沒這問題的反向代理伺服器來工作。</p>
+</div>
+<div class="paragraph">
+<p>當然，首選 <a href="http://www.haproxy.org">HAProxy</a>。 怎麼架，就請參考 <a href="/install-disperse-forward-proxy/">架設分散式的正向代理</a>。</p>
+</div>
+</div>
+</div>
+    </section>
+  </article>
+
+  <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="https://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2finstall-caddy-as-forward-proxy-server%2f"/>
+    </div>
+</div>
+
+
+  <div class="row li-pagination">
+    <div class="eight columns">
+      <div class="li-pagination-previous">
+        
+        <a href="/clean-git-repo/"> 清除 git 所有遠端舊的紀錄 重新來過</a>
+        &lt;&lt;
+        
+      </div>
+    </div>
+    <div class="eight columns">
+      <div class="li-pagination-next">
+        
+        &gt;&gt;
+        <a href="/install-disperse-forward-proxy/"> 架設分散式的正向代理</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  </article>
+  <aside class="side">
+    
+    
+    
+  </aside>
+  <div class="ad">
+    
+    
+    
+  </div>
+  <footer class="footer">
+    &copy; 2021. All rights reserved. 
+  </footer>
+</body>
+
+</html>

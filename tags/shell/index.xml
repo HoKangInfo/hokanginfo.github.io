@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell on The Issue of the Day Before</title>
+    <link>/tags/shell/</link>
+    <description>Recent content in shell on The Issue of the Day Before</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Wed, 25 Apr 2018 08:37:08 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shell Output to Screen and File</title>
+      <link>/shell-output-to-screen-and-file/</link>
+      <pubDate>Wed, 25 Apr 2018 08:37:08 +0000</pubDate>
+      
+      <guid>/shell-output-to-screen-and-file/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;有時候我們看到螢幕上的輸出結果，希望能記錄下來。這時候可以使用重導輸出算子 &lt;code&gt;&amp;gt;&lt;/code&gt; 。
+例如使用 &lt;code&gt;ls &amp;gt; out.txt&lt;/code&gt; 將 &lt;code&gt;ls&lt;/code&gt; 的結果寫到檔案 &lt;code&gt;out.txt&lt;/code&gt; 上，但這樣我們在螢幕上便看不到結果。
+要看結果必須再用 &lt;code&gt;cat out.txt&lt;/code&gt; 將檔案內容輸出到螢幕上。 這時候便可使用 &lt;code&gt;tee&lt;/code&gt; 這個指令。&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell Grep Ps Out of Self</title>
+      <link>/shell-grep-ps-out-of-self/</link>
+      <pubDate>Wed, 25 Apr 2018 01:42:22 +0000</pubDate>
+      
+      <guid>/shell-grep-ps-out-of-self/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;在使用 &lt;code&gt;ps&lt;/code&gt; 指令查詢目前執行的 process 時，為方便通常會搭配 &lt;code&gt;grep&lt;/code&gt; 指令來過濾結果。
+但因為 &lt;code&gt;grep&lt;/code&gt; 本身也是一個 process ，所以常常過濾的結果還會包含 &lt;code&gt;grep&lt;/code&gt; 指令本身。
+這可能不是我們想要的。那應該如何下指令?&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Shell Filter Empty Line</title>
+      <link>/shell-filter-empty-line/</link>
+      <pubDate>Tue, 24 Apr 2018 07:07:20 +0000</pubDate>
+      
+      <guid>/shell-filter-empty-line/</guid>
+      <description>&lt;div class=&#34;paragraph&#34;&gt;
+&lt;p&gt;在處理文字檔時，有時候需要將空白行去掉。這時候，可以利用 &lt;code&gt;awk&lt;/code&gt; 來處理。&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
