@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>install hugo &middot; The Issue of the Day Before</title>
+  <link rel="stylesheet" href="/css/azure.css" />
+  <link rel="stylesheet" href="/css/asciidoctor-default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  <style type="text/css">
+  </style>
+</head>
+
+<body class="normalize">
+  <header class="header">
+    
+    <a class="title" href="/">The Issue of the Day Before</a>
+  </header>
+  <nav class="main-nav">
+    
+    
+    
+  </nav>
+  <article class="main gridpaper container">
+    
+
+
+
+
+  <article class="li-article">
+    <header class="li-article-header">
+      <h1 class="li-article-title">安裝支援 asciidoc 語法的 hugo</h1>
+      <span class="li-article-taxonomies">
+        
+
+        
+        <i class="post-tags" alt="tags">
+          
+          <a href="/tags/install">install</a>
+          
+          <a href="/tags/hugo">hugo</a>
+          
+          <a href="/tags/asciidoctor">asciidoctor</a>
+          
+        </i>
+        
+      </span>
+       - 
+      <time class="li-article-date">2018-03-12</time>
+    </header>
+    <section class="section">
+      <div class="paragraph">
+<p>安裝 asciidoctor &#8594;
+安裝 hugo</p>
+</div>
+<div class="sect1">
+<h2 id="_why">Why</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>用什麼工具產出靜態網頁其實不重要，重要的是支援轉換的格式。雖不重要但也不能太差，就選一個最新發展的。
+可惜，目前沒看到原生支援 AsciiDoc 的靜態網站產生器。還好 Hugo 可以使用外部轉換器，雖然結果不是很完美。
+那為什麼選 AsciiDoc 不選 Markdown？當然是因為 AsciiDoc 是 A 開頭，而 Markdown 是 M 開頭，兩個差距可不是一個兩個的。
+哈 &#8230;&#8203;，其實是 AsciiDoc 支援的格式多。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what">What</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Markdown</dt>
+<dd>
+<p><a href="https://daringfireball.net/projects/markdown">Markdown</a>
+是一種輕量級標記式語言，以易於閱讀、易於撰寫的純文字格式為賣點，可轉換成 HTML。</p>
+</dd>
+<dt class="hdlist1">AsciiDoc</dt>
+<dd>
+<p><a href="http://asciidoc.org">AsciiDoc</a>
+是一種輕量級標記式語言，語法有點像 Markdown，以人類易於閱讀、易於撰寫的純文字格式為賣點，可轉換成 HTML 或各種電子書格式。</p>
+</dd>
+<dt class="hdlist1">Asciidoctor</dt>
+<dd>
+<p><a href="https://asciidoctor.org">Asciidoctor</a> 以 Ruby 實現的 AsciiDoc 轉換工具實作。
+然後加了一堆他認為好用的特性。也是目前認為最好的 AsciiDoc 轉換工具。</p>
+</dd>
+<dt class="hdlist1">Ruby</dt>
+<dd>
+<p><a href="https://www.ruby-lang.org">Ruby</a> 一種 script language。</p>
+</dd>
+<dt class="hdlist1">rbenv</dt>
+<dd>
+<p><a href="https://github.com/rbenv/rbenv">rbenv</a> 是安裝與管理 Ruby 版本的工具。</p>
+</dd>
+<dt class="hdlist1">gem</dt>
+<dd>
+<p><a href="https://rubygems.org">gem</a> 是 Ruby 的套件管理服務工具。</p>
+</dd>
+<dt class="hdlist1">Hugo</dt>
+<dd>
+<p><a href="https://gohugo.io">Hugo</a> 用 golang 寫的靜態網站產生器，內容格式原生支援 Markdown。</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how">How</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>安裝 asciidoctor 必須有 ruby 環境，而 ruby 可藉由 rbenv 或 RVM 安裝。</p>
+</div>
+<div class="sect2">
+<h3 id="_安裝_rbenv">安裝 rbenv</h3>
+<div class="paragraph">
+<p>如果沒有 Ruby 執行環境，請先安裝 rbenv。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; git clone https://github.com/rbenv/rbenv.git ~/.rbenv         // <b class="conum">(1)</b>
+&gt; cd ~/.rbenv &amp;&amp; src/configure &amp;&amp; make -C src                   // <b class="conum">(2)</b>
+&gt; echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bashrc      // <b class="conum">(3)</b>
+&gt; echo 'eval "$(rbenv init -)"' &gt;&gt; ~/.bashrc                    // <b class="conum">(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>從 github 複製 rbenv 原始碼到安裝目錄 <code>~/.rbenv</code></p>
+</li>
+<li>
+<p>切換到安裝目錄並編譯</p>
+</li>
+<li>
+<p>將結果設到可執行路徑</p>
+</li>
+<li>
+<p>在啟動時載入 rbenv</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>從新載入 shell 或 <code>source ~/.bashrc</code> 後，將 ruby-build 安裝為 rbenv 的 plugin。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_安裝_ruby_build_ruby">安裝 ruby-build &amp;&amp; ruby</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; mkdir -p "$(rbenv root)"/plugins                              // <b class="conum">(1)</b>
+&gt; git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build // <b class="conum">(2)</b>
+&gt; sudo apt-get install -y libreadline-dev                       // <b class="conum">(3)</b>
+&gt; RUBY_CONFIGURE_OPTS=--disable-install-doc rbenv install 2.5.0 // <b class="conum">(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>建立 rbenv plugins 目錄</p>
+</li>
+<li>
+<p>從 github 複製 ruby-build 原始碼到 plugins 目錄</p>
+</li>
+<li>
+<p>安裝 libreadline-dev 函式庫來避免 <code>The Ruby readline extension was not compiled.</code> 編譯錯誤</p>
+</li>
+<li>
+<p>安裝並編譯你要的 Ruby 版本，使用 <code>RUBY_CONFIGURE_OPTS=--disable-install-doc</code> 參數來禁止編譯 rdoc 可避免一些編譯錯誤</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>最後，使用 <code>curl -fsSL <a href="https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor" class="bare">https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor</a> | bash</code> 來檢測安裝結果</p>
+</div>
+<div class="paragraph">
+<p>沒問題，就可以使用 <code>rbenv global 2.5.0</code> 將要使用的 Ruby 版本設給 rbenv</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_安裝_asciidoctor_asciidoctor_diagram">安裝 asciidoctor &amp;&amp; asciidoctor-diagram</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; gem install asciidoctor
+&gt; gem install asciidoctor-diagram</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>但 asciidoctor-diagram 依賴呼叫外部工具來完成繪圖，用不同的繪圖格式就要安裝相對應的工具，例如</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>graphviz <code>sudo apt-get install -y graphviz</code></p>
+</li>
+<li>
+<p>ditaa <code>sudo apt-get install -y ditaa</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_安裝_hugo">安裝 Hugo</h3>
+<div class="paragraph">
+<p>到 <a href="https://github.com/gohugoio/hugo/releases">下載 Hugo</a> 選擇你要版本</p>
+</div>
+<div class="listingblock">
+<div class="title">e.q.</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">&gt; wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.tar.gz
+&gt; tar zxvf hugo_0.37.1_Linux-64bit.tar.gz
+&gt; cp hugo /usr/local/sbin/                 // <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>複製執行檔到可執行路徑或將 hugo 執行檔所在目錄加到可執行路徑</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>要啟動 hugo server</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt; hugo server -p &lt;port&gt; --bind=0.0.0.0 --baseURL=http://&lt;ip or domain&gt;/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--bind=0.0.0.0</code> 是不綁定特定 IP，內定是 <code>127.0.0.1</code>。當主機有多個 IP 介面時可以指定其中一個。
+不綁定特定 IP 適用主機本身沒有 Pubic IP 介面的雲端或內部主機。</p>
+</div>
+<div class="paragraph">
+<p><code>--baseURL=</code> 的設定會影響到 <code>{{.Site.BaseURL}}</code> 或 <code>{{.Permalink}}</code> 等會引用 <code>baseURL</code> 的參數值。
+若連結網址不要包含 <code>baseURL</code> 可將 <code>{{.Permalink}}</code> 改為 <code>{{.RelPermalink}}</code>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fix_asciidoctor">fix asciidoctor</h3>
+<div class="paragraph">
+<p>現在你應該可以利用 hugo 將 ad 轉成 html，但基於
+<a href="https://gohugo.io/content-management/formats/">Hugo Supported Content Formats</a>
+傳給 asciidoctor 的參數是 <code>asciidoctor: --no-header-footer --safe --trace -</code>
+沒有載入 asciidoctor-diagram 模組，所以做圖是沒有作用的。</p>
+</div>
+<div class="paragraph">
+<p>要改傳參數給 asciidoctor 可以修改 <code>vi $(which asciidoctor)</code> 來達成。因為
+hugo 呼叫 <code>getAsciidoctorExecPath()</code> 來取得 asciidoctor 的執行路徑，約同於
+<code>which asciidoctor</code>，但如果你使用 rbenv 安裝 ruby 他會使用 'shims' 來執行，而每次使用
+<code>eval "$(rbenv init -)"</code> 載入 rbenv， shims 上的執行檔就會被覆寫。</p>
+</div>
+<div class="paragraph">
+<p>所以將修改後的 asciidoctor 另存路徑並將該路徑設給 <code>PATH</code>，讓 hugo 執行你改寫的 asciidoctor，即可。</p>
+</div>
+<div class="listingblock">
+<div class="title">asciidoctor</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">#!/usr/bin/env bash
+set -e
+[ -n "$RBENV_DEBUG" ] &amp;&amp; set -x
+
+program="${0##*/}"
+if [ "$program" = "ruby" ]; then
+  for arg; do
+    case "$arg" in
+    -e* | -- ) break ;;
+    */* )
+      if [ -f "$arg" ]; then
+        export RBENV_DIR="${arg%/*}"
+        break
+      fi
+      ;;
+    esac
+  done
+fi
+
+export RBENV_ROOT="/home/robin/.rbenv"
+#exec "/home/robin/.rbenv/libexec/rbenv" exec "$program" "$@"
+# fix to
+exec "/home/robin/.rbenv/libexec/rbenv" exec "$program" \
+"-r" "asciidoctor-diagram" \            // <b class="conum">(1)</b>
+"-B" "/tmp" \                           // <b class="conum">(2)</b>
+"-a" "imagesdir=adg/$(date +%s)" \      // <b class="conum">(3)</b>
+"-a" "data-uri" \                       // <b class="conum">(4)</b>
+"-a" "allow-uri-read" \
+"$@"</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>使用 <code>-r asciidoctor-diagram</code> 載入 sciidoctor-diagram，參 <a href="https://asciidoctor.org/docs/asciidoctor-diagram/" class="bare">https://asciidoctor.org/docs/asciidoctor-diagram/</a></p>
+</li>
+<li>
+<p>設定 base_dir 以避開在工作目錄產生的各種中間產物</p>
+</li>
+<li>
+<p>設定 imagesdir 在時戳目錄下以避開同名圖檔</p>
+</li>
+<li>
+<p>使用 <code>-a data-uri -a allow-uri-read</code> 將圖片嵌入 html，參 <a href="https://asciidoctor.org/docs/convert-documents/" class="bare">https://asciidoctor.org/docs/convert-documents/</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+    </section>
+  </article>
+
+  <div class="row li-author">
+    <div class="sixteen columns">
+        閱讀在雲端 <img id="qrcode"
+        src="https://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=%2finstall-hugo%2f"/>
+    </div>
+</div>
+
+
+  <div class="row li-pagination">
+    <div class="eight columns">
+      <div class="li-pagination-previous">
+        
+        <a href="/install-disperse-forward-proxy/"> 架設分散式的正向代理</a>
+        &lt;&lt;
+        
+      </div>
+    </div>
+    <div class="eight columns">
+      <div class="li-pagination-next">
+        
+        &gt;&gt;
+        <a href="/shell-filter-empty-line/"> 使用 awk 命令去掉文字檔中的空行</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  </article>
+  <aside class="side">
+    
+    
+    
+  </aside>
+  <div class="ad">
+    
+    
+    
+  </div>
+  <footer class="footer">
+    &copy; 2021. All rights reserved. 
+  </footer>
+</body>
+
+</html>
